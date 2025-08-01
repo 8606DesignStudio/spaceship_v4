@@ -1,6 +1,5 @@
 /* ========== CSS FILE (styles.css) ========== */
 /* This file contains ALL the styling and appearance rules */
-/* All positioning and sizing now uses viewport units (vw/vh) for background-relative scaling */
 
 * { 
     margin: 0; 
@@ -11,23 +10,22 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     height: 100vh;
-    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #000000 url('public/cockpit.jpg') center top/100% auto no-repeat;
     color: white;
+    flex-direction: column;
     position: relative;
-    overflow: hidden;
 }
 
 /* Shooting stars container - positioned within the cockpit window */
 #shooting-stars-container {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     pointer-events: none;
     z-index: 1;
@@ -51,15 +49,15 @@ body {
 /* Individual shooting star styling */
 .shooting-star {
     position: absolute;
-    width: 0.1vw;
-    height: 0.1vw;
+    width: 2px;
+    height: 2px;
     background: white;
     border-radius: 50%;
     opacity: 0;
     box-shadow: 
-        0 0 0.3vw 0.1vw rgba(255, 255, 255, 0.8),
-        0 0 0.6vw 0.2vw rgba(135, 206, 235, 0.6),
-        0 0 0.9vw 0.3vw rgba(75, 184, 233, 0.4);
+        0 0 6px 2px rgba(255, 255, 255, 0.8),
+        0 0 12px 4px rgba(135, 206, 235, 0.6),
+        0 0 18px 6px rgba(75, 184, 233, 0.4);
 }
 
 /* Shooting star tail effect */
@@ -68,20 +66,20 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 2.6vw;
-    height: 0.05vw;
+    width: 50px;
+    height: 1px;
     background: linear-gradient(90deg, 
         rgba(255, 255, 255, 0.8) 0%, 
         rgba(135, 206, 235, 0.6) 50%, 
         transparent 100%);
-    transform: translateX(-2.6vw);
-    border-radius: 0.05vw;
+    transform: translateX(-50px);
+    border-radius: 1px;
 }
 
 /* Shooting star animation */
 @keyframes shoot {
     0% {
-        transform: translateX(-3.1vw) translateY(-3.1vh);
+        transform: translateX(-60px) translateY(-60px);
         opacity: 0;
     }
     10% {
@@ -91,7 +89,7 @@ body {
         opacity: 1;
     }
     100% {
-        transform: translateX(calc(45vw + 3.1vw)) translateY(calc(35vh + 3.1vh));
+        transform: translateX(calc(45vw + 60px)) translateY(calc(35vh + 60px));
         opacity: 0;
     }
 }
@@ -100,31 +98,30 @@ body {
     animation: shoot linear forwards;
 }
 
-/* Episode display - positioned relative to background */
 .episode {
     position: absolute;
-    top: 12vh;
-    left: 50vw;
+    top: 12%;
+    left: 50%;
     transform: translateX(-50%) perspective(400px) rotateX(-25deg);
-    width: 60vw;
-    max-width: 31.25vw; /* Equivalent to 600px at 1920px width */
+    width: 60%;
+    max-width: 600px;
     font-family: 'Quicksand', sans-serif;
-    font-size: 1.25vw;
+    font-size: 1.2rem;
     font-weight: 550;
     color: #4bb8e9;
     opacity: 0.4;
     text-align: center;
-    min-height: 5.6vh;
+    min-height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.4vh 1.6vw;
+    padding: 15px;
     text-shadow: 
-        0 0 0.26vw rgba(138, 43, 226, 0.9),
-        0 0 0.52vw rgba(147, 112, 219, 0.8),
-        0 0 0.78vw rgba(123, 104, 238, 0.7),
-        0 0 1.3vw rgba(106, 90, 205, 0.5),
-        0 0 1.8vw rgba(72, 61, 139, 0.3);
+        0 0 5px rgba(138, 43, 226, 0.9),
+        0 0 10px rgba(147, 112, 219, 0.8),
+        0 0 15px rgba(123, 104, 238, 0.7),
+        0 0 25px rgba(106, 90, 205, 0.5),
+        0 0 35px rgba(72, 61, 139, 0.3);
 }
 
 .episode a {
@@ -137,96 +134,134 @@ body {
     color: #87ceeb;
     text-decoration: underline;
     text-shadow: 
-        0 0 0.42vw rgba(138, 43, 226, 0.9),
-        0 0 0.78vw rgba(147, 112, 219, 0.8),
-        0 0 1.3vw rgba(123, 104, 238, 0.6);
+        0 0 8px rgba(138, 43, 226, 0.9),
+        0 0 15px rgba(147, 112, 219, 0.8),
+        0 0 25px rgba(123, 104, 238, 0.6);
 }
 
-/* Button container - positioned relative to background */
 .stripe-button {
-    position: absolute;
-    bottom: 1.85vh;
-    left: 1.04vw;
+    position: fixed;
+    bottom: 20px;
+    left: calc(50vw - 50vh * 0.75 + 20px);
     z-index: 1000;
-    display: flex;
-    gap: 0.52vw;
+}
+
+/* Adjust button position for mobile */
+@media (max-width: 767px) {
+    .stripe-button {
+        bottom: 20px;
+        left: 20px;
+    }
+}
+
+/* Adjust button position for wide screens where image is constrained by height */
+@media (min-width: 768px) {
+    .stripe-button {
+        left: calc(50vw - 50vh * 0.75 + 20px);
+    }
+}
+
+/* For very wide screens where the image width is constrained */
+@media (min-width: 768px) and (min-aspect-ratio: 4/3) {
+    .stripe-button {
+        left: calc(50vw - 25vw + 20px);
+    }
 }
 
 .stripe-button a {
     display: inline-block;
-    padding: 0.74vh 0.83vw;
+    padding: 8px 16px;
     background: linear-gradient(135deg, #4bb8e9, #87ceeb);
     color: white;
     text-decoration: none;
-    border-radius: 0.31vw;
+    border-radius: 6px;
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.47vw;
+    font-size: 0.9rem;
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 
-        0 0.1vh 0.42vw rgba(75, 184, 233, 0.3),
-        0 0 0 0.05vw rgba(255, 255, 255, 0.1);
+        0 2px 8px rgba(75, 184, 233, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .stripe-button a:hover {
     background: linear-gradient(135deg, #87ceeb, #add8e6);
-    transform: translateY(-0.09vh);
+    transform: translateY(-1px);
     box-shadow: 
-        0 0.37vh 0.63vw rgba(75, 184, 233, 0.4),
-        0 0 0 0.05vw rgba(255, 255, 255, 0.2);
+        0 4px 12px rgba(75, 184, 233, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .stripe-button .scraper-link {
+    display: inline-block;
+    padding: 8px 16px;
     background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: 10px;
     box-shadow: 
-        0 0.1vh 0.42vw rgba(155, 89, 182, 0.3),
-        0 0 0 0.05vw rgba(255, 255, 255, 0.1);
+        0 2px 8px rgba(155, 89, 182, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .stripe-button .scraper-link:hover {
     background: linear-gradient(135deg, #a569bd, #9b59b6);
-    transform: translateY(-0.09vh);
+    transform: translateY(-1px);
     box-shadow: 
-        0 0.37vh 0.63vw rgba(155, 89, 182, 0.4),
-        0 0 0 0.05vw rgba(255, 255, 255, 0.2);
+        0 4px 12px rgba(155, 89, 182, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 .stripe-button .new-page-link {
+    display: inline-block;
+    padding: 8px 16px;
     background: linear-gradient(135deg, #e67e22, #d35400);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: 10px;
     box-shadow: 
-        0 0.1vh 0.42vw rgba(230, 126, 34, 0.3),
-        0 0 0 0.05vw rgba(255, 255, 255, 0.1);
+        0 2px 8px rgba(230, 126, 34, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .stripe-button .new-page-link:hover {
     background: linear-gradient(135deg, #f39c12, #e67e22);
-    transform: translateY(-0.09vh);
+    transform: translateY(-1px);
     box-shadow: 
-        0 0.37vh 0.63vw rgba(230, 126, 34, 0.4),
-        0 0 0 0.05vw rgba(255, 255, 255, 0.2);
+        0 4px 12px rgba(230, 126, 34, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
-/* Dials container - positioned relative to background */
 .dials {
     position: absolute;
-    top: 32.5vh;
-    left: 50vw;
+    top: 32.5%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .dial {
-    width: 3.9vw;
+    width: 75px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: transform 0.2s;
-    font-size: 1.77vw;
+    font-size: 1.7rem;
     font-weight: 550;
     color: #4bb8e9;
     text-shadow: 
-        0 0 0.42vw rgba(75, 184, 233, 0.4),
-        0 0 0.83vw rgba(75, 184, 233, 0.2);
+        0 0 8px rgba(75, 184, 233, 0.4),
+        0 0 16px rgba(75, 184, 233, 0.2);
 }
 
 .dial:hover { 
@@ -238,9 +273,9 @@ body {
     top: 10%;
     left: 50%;
     transform: translateX(-50%) scaleX(2);
-    font-size: 0.52vw;
+    font-size: 1rem;
     color: #4bb8e9;
-    text-shadow: 0 0 0.52vw rgba(255, 215, 0, 0.5);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
     pointer-events: none;
     z-index: 5;
 }
