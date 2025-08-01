@@ -35,8 +35,8 @@ dialElement.appendChild(instructionArrow);
 // Create invisible touch area for better mobile interaction
 const touchArea = document.createElement('div');
 touchArea.style.position = 'absolute';
-touchArea.style.width = '225px';
-touchArea.style.height = '150px';
+touchArea.style.width = '11.7vw';
+touchArea.style.height = '13.9vh';
 touchArea.style.left = '50%';
 touchArea.style.top = '50%';
 touchArea.style.transform = 'translate(-50%, -50%)';
