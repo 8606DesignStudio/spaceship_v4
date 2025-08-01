@@ -1,0 +1,14 @@
+{
+  "name": "spaceship_v4",
+  "version": "1.0.0",
+  "description": "Heart Emoji Podcast episode navigator",
+  "main": "script.js",
+  "scripts": {
+    "generate-episodes": "node scripts/generate_episodes_data.js",
+    "dev": "python -m http.server 8000",
+    "start": "python -m http.server 8000"
+  },
+  "keywords": ["podcast", "episodes", "navigator"],
+  "author": "",
+  "license": "ISC"
+}
